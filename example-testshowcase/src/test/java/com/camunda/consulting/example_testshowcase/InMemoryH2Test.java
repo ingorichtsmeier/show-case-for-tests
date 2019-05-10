@@ -60,9 +60,11 @@ public class InMemoryH2Test {
   public void testPrcNotOK() {
     ProcessInstance processInstance = runtimeService()
         .createProcessInstanceByKey(PROCESS_DEFINITION_KEY)
-        .startAfterActivity("UserTask2Task")
-        .setVariables(withVariables("prc_ok", false))
+        .startBeforeActivity("UserTask2Task")
         .execute();
+    
+    assertThat(processInstance).isWaitingAt("UserTask2Task");
+    complete(task(), withVariables("prc_ok", false));
     
     assertThat(processInstance).isWaitingAt("UserTask1Task");
   }
