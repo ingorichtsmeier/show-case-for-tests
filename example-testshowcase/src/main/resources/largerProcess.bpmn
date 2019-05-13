@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" id="Definitions_1brnyym" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <bpmn:collaboration id="Collaboration_7k841tq">
+    <bpmn:participant id="Participant_00ines1" name="Participant" processRef="LargerProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="LargerProcess" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_0q8qwhk">
+      <bpmn:lane id="Lane_0xbrxmw" name="lane4">
+        <bpmn:flowNodeRef>callForArbitration</bpmn:flowNodeRef>
+        <bpmn:childLaneSet id="LaneSet_0xdm9e4">
+          <bpmn:lane id="Lane_049jppf">
+            <bpmn:flowNodeRef>callForArbitration</bpmn:flowNodeRef>
+          </bpmn:lane>
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+      <bpmn:lane id="lane3" name="lane3">
+        <bpmn:flowNodeRef>requiredToEditOrSelectArbiters</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>xgwRequiredToEditOrSelectArbiters</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>isProjectApproved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>xgwIsProjectApproved</bpmn:flowNodeRef>
+        <bpmn:childLaneSet id="LaneSet_1y2pinq">
+          <bpmn:lane id="Lane_1ppf4zp">
+            <bpmn:flowNodeRef>requiredToEditOrSelectArbiters</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>xgwRequiredToEditOrSelectArbiters</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>isProjectApproved</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>xgwIsProjectApproved</bpmn:flowNodeRef>
+          </bpmn:lane>
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1mbw09j" name="lane2">
+        <bpmn:flowNodeRef>confirmationAndCostAcception</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>xgwConfirmationAndCostAcception</bpmn:flowNodeRef>
+        <bpmn:childLaneSet id="LaneSet_1p5olsz">
+          <bpmn:lane id="Lane_109xabx">
+            <bpmn:flowNodeRef>confirmationAndCostAcception</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>xgwConfirmationAndCostAcception</bpmn:flowNodeRef>
+          </bpmn:lane>
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_0rktbwh" name="lane1">
+        <bpmn:flowNodeRef>start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>projectRegistration</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>isSubjectToClauseT</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>xgwIsSubjectToClauseT</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>isEnactedByStateCouncil</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>xgwIsEnactedByStateCouncil</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>issueApprovalCode</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>disapprovalNotifying</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>end</bpmn:flowNodeRef>
+        <bpmn:childLaneSet id="LaneSet_0kio200">
+          <bpmn:lane id="Lane_07ky0ye">
+            <bpmn:flowNodeRef>start</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>projectRegistration</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>isSubjectToClauseT</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>xgwIsSubjectToClauseT</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>isEnactedByStateCouncil</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>xgwIsEnactedByStateCouncil</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>issueApprovalCode</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>disapprovalNotifying</bpmn:flowNodeRef>
+            <bpmn:flowNodeRef>end</bpmn:flowNodeRef>
+          </bpmn:lane>
+        </bpmn:childLaneSet>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="start" name="start">
+      <bpmn:outgoing>flwStart</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="projectRegistration" name="task1">
+      <bpmn:incoming>flwStart</bpmn:incoming>
+      <bpmn:incoming>flwRequiredToEditOrSelectArbitersTrue</bpmn:incoming>
+      <bpmn:incoming>flwConfirmationAndCostAcceptionTrueTrue</bpmn:incoming>
+      <bpmn:outgoing>flwProjectRegistration</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="isSubjectToClauseT" name="task2">
+      <bpmn:documentation>'مرتبط با بند 'ب' 'پ' 'ت</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="prc_is_subject_to_clause_t" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flwProjectRegistration</bpmn:incoming>
+      <bpmn:outgoing>flwIsSubjectToClauseT</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="xgwIsSubjectToClauseT">
+      <bpmn:incoming>flwIsSubjectToClauseT</bpmn:incoming>
+      <bpmn:outgoing>flwIsSubjectToClauseTFalse</bpmn:outgoing>
+      <bpmn:outgoing>flwIsSubjectToClauseTTrue</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="isEnactedByStateCouncil" name="task3">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="prc_is_enacted_by_state_council" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flwIsSubjectToClauseTFalse</bpmn:incoming>
+      <bpmn:outgoing>flwIsEnactedByStateCouncil</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="xgwIsEnactedByStateCouncil">
+      <bpmn:incoming>flwIsEnactedByStateCouncil</bpmn:incoming>
+      <bpmn:outgoing>flwIsEnactedByStateCouncilTrue</bpmn:outgoing>
+      <bpmn:outgoing>flwIsEnactedByStateCouncilFalse</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="confirmationAndCostAcception" name="task6">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="prc_is_cost_accepted" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+          <camunda:formField id="prc_confirmation" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+          <camunda:formField id="prc_required_to_edit" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flwIsEnactedByStateCouncilTrue</bpmn:incoming>
+      <bpmn:outgoing>flwConfirmationAndCostAcception</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="xgwConfirmationAndCostAcception">
+      <bpmn:incoming>flwConfirmationAndCostAcception</bpmn:incoming>
+      <bpmn:outgoing>flwConfirmationAndCostAcceptionTrueFalseTrue</bpmn:outgoing>
+      <bpmn:outgoing>flwConfirmationAndCostAcceptionFalse</bpmn:outgoing>
+      <bpmn:outgoing>flwConfirmationAndCostAcceptionTrueFalseFalse</bpmn:outgoing>
+      <bpmn:outgoing>flwConfirmationAndCostAcceptionTrueTrue</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="requiredToEditOrSelectArbiters" name="task7">
+      <bpmn:documentation>نیاز به ویرایش یا انتخاب داوران</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="prc_required_to_edit_or_select_arbiters" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flwConfirmationAndCostAcceptionTrueFalseFalse</bpmn:incoming>
+      <bpmn:incoming>flwIsEnactedByStateCouncilFalse</bpmn:incoming>
+      <bpmn:outgoing>flwRequiredToEditOrSelectArbiters</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="issueApprovalCode" name="task4">
+      <bpmn:incoming>flwIsSubjectToClauseTTrue</bpmn:incoming>
+      <bpmn:incoming>flwConfirmationAndCostAcceptionTrueFalseTrue</bpmn:incoming>
+      <bpmn:outgoing>flwIssueApprovalCode</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="flwConfirmationAndCostAcceptionTrueTrue" name="option4" sourceRef="xgwConfirmationAndCostAcception" targetRef="projectRegistration">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_confirmation== true &amp;&amp; prc_required_to_edit== true }</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwIsEnactedByStateCouncilFalse" name="False" sourceRef="xgwIsEnactedByStateCouncil" targetRef="requiredToEditOrSelectArbiters">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_is_enacted_by_state_council== false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwIsEnactedByStateCouncil" sourceRef="isEnactedByStateCouncil" targetRef="xgwIsEnactedByStateCouncil" />
+    <bpmn:sequenceFlow id="flwIsSubjectToClauseTFalse" name="False" sourceRef="xgwIsSubjectToClauseT" targetRef="isEnactedByStateCouncil">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_is_subject_to_clause_t== false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwIsSubjectToClauseT" sourceRef="isSubjectToClauseT" targetRef="xgwIsSubjectToClauseT" />
+    <bpmn:sequenceFlow id="flwProjectRegistration" sourceRef="projectRegistration" targetRef="isSubjectToClauseT" />
+    <bpmn:sequenceFlow id="flwStart" sourceRef="start" targetRef="projectRegistration" />
+    <bpmn:sequenceFlow id="flwRequiredToEditOrSelectArbitersTrue" name="true" sourceRef="xgwRequiredToEditOrSelectArbiters" targetRef="projectRegistration">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_required_to_edit_or_select_arbiters== true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwConfirmationAndCostAcceptionFalse" name="option2" sourceRef="xgwConfirmationAndCostAcception" targetRef="disapprovalNotifying">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_confirmation== false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwIsEnactedByStateCouncilTrue" name="true" sourceRef="xgwIsEnactedByStateCouncil" targetRef="confirmationAndCostAcception">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_is_enacted_by_state_council== true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwIsSubjectToClauseTTrue" name="true" sourceRef="xgwIsSubjectToClauseT" targetRef="issueApprovalCode">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_is_subject_to_clause_t== true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwConfirmationAndCostAcceptionTrueFalseTrue" name="option1" sourceRef="xgwConfirmationAndCostAcception" targetRef="issueApprovalCode">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_confirmation== true &amp;&amp; prc_required_to_edit== false &amp;&amp; prc_is_cost_accepted== true }</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwConfirmationAndCostAcceptionTrueFalseFalse" name="option3" sourceRef="xgwConfirmationAndCostAcception" targetRef="requiredToEditOrSelectArbiters">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_confirmation== true &amp;&amp; prc_required_to_edit== false &amp;&amp; prc_is_cost_accepted== false }</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwConfirmationAndCostAcception" sourceRef="confirmationAndCostAcception" targetRef="xgwConfirmationAndCostAcception" />
+    <bpmn:sequenceFlow id="flwRequiredToEditOrSelectArbiters" sourceRef="requiredToEditOrSelectArbiters" targetRef="xgwRequiredToEditOrSelectArbiters" />
+    <bpmn:sequenceFlow id="flwIsProjectApprovedFalse" name="False" sourceRef="xgwIsProjectApproved" targetRef="disapprovalNotifying">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_is_project_approved== false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwDisapprovalNotifying" sourceRef="disapprovalNotifying" targetRef="end" />
+    <bpmn:sequenceFlow id="flwRequiredToEditOrSelectArbitersFalse" name="False" sourceRef="xgwRequiredToEditOrSelectArbiters" targetRef="callForArbitration">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_required_to_edit_or_select_arbiters== false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwCallForArbitration" sourceRef="callForArbitration" targetRef="isProjectApproved" />
+    <bpmn:sequenceFlow id="flwIssueApprovalCode" sourceRef="issueApprovalCode" targetRef="end" />
+    <bpmn:sequenceFlow id="flwIsProjectApprovedTrue" name="true" sourceRef="xgwIsProjectApproved" targetRef="end">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${prc_is_project_approved== true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="flwIsProjectApproved" sourceRef="isProjectApproved" targetRef="xgwIsProjectApproved" />
+    <bpmn:exclusiveGateway id="xgwRequiredToEditOrSelectArbiters">
+      <bpmn:incoming>flwRequiredToEditOrSelectArbiters</bpmn:incoming>
+      <bpmn:outgoing>flwRequiredToEditOrSelectArbitersTrue</bpmn:outgoing>
+      <bpmn:outgoing>flwRequiredToEditOrSelectArbitersFalse</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="callForArbitration" name="task9">
+      <bpmn:incoming>flwRequiredToEditOrSelectArbitersFalse</bpmn:incoming>
+      <bpmn:outgoing>flwCallForArbitration</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="isProjectApproved" name="task8">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="prc_is_project_approved" type="boolean">
+            <camunda:properties>
+              <camunda:property id="true" value="true" />
+              <camunda:property id="false" value="false" />
+            </camunda:properties>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>flwCallForArbitration</bpmn:incoming>
+      <bpmn:outgoing>flwIsProjectApproved</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="xgwIsProjectApproved">
+      <bpmn:incoming>flwIsProjectApproved</bpmn:incoming>
+      <bpmn:outgoing>flwIsProjectApprovedFalse</bpmn:outgoing>
+      <bpmn:outgoing>flwIsProjectApprovedTrue</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="disapprovalNotifying" name="task5">
+      <bpmn:incoming>flwConfirmationAndCostAcceptionFalse</bpmn:incoming>
+      <bpmn:incoming>flwIsProjectApprovedFalse</bpmn:incoming>
+      <bpmn:outgoing>flwDisapprovalNotifying</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="end" name="end">
+      <bpmn:incoming>flwIssueApprovalCode</bpmn:incoming>
+      <bpmn:incoming>flwDisapprovalNotifying</bpmn:incoming>
+      <bpmn:incoming>flwIsProjectApprovedTrue</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_7k841tq">
+      <bpmndi:BPMNShape id="Participant_00ines1_di" bpmnElement="Participant_00ines1" isHorizontal="true">
+        <dc:Bounds x="156" y="81" width="1536" height="816" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0tfn307_di" bpmnElement="projectRegistration">
+        <dc:Bounds x="322" y="188" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0s37lyw_di" bpmnElement="start">
+        <dc:Bounds x="249" y="210" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="255" y="195" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_15mmx8h_di" bpmnElement="isSubjectToClauseT">
+        <dc:Bounds x="479" y="188" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0nnorjn_di" bpmnElement="xgwIsSubjectToClauseT" isMarkerVisible="true">
+        <dc:Bounds x="636" y="203" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0wdwogw_di" bpmnElement="xgwConfirmationAndCostAcception" isMarkerVisible="true">
+        <dc:Bounds x="1081" y="363" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0pcbw5k_di" bpmnElement="confirmationAndCostAcception">
+        <dc:Bounds x="940" y="348" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_00o5ibd_di" bpmnElement="flwIsSubjectToClauseTFalse">
+        <di:waypoint x="686" y="228" />
+        <di:waypoint x="748" y="228" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="704" y="210" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_07meeeh_di" bpmnElement="flwIsSubjectToClauseT">
+        <di:waypoint x="579" y="228" />
+        <di:waypoint x="636" y="228" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0yizoa7_di" bpmnElement="flwConfirmationAndCostAcception">
+        <di:waypoint x="1040" y="388" />
+        <di:waypoint x="1081" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_09kqh31_di" bpmnElement="flwConfirmationAndCostAcceptionTrueFalseTrue">
+        <di:waypoint x="1106" y="363" />
+        <di:waypoint x="1106" y="181" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1135" y="333" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Lane_0rktbwh_di" bpmnElement="Lane_0rktbwh" isHorizontal="true">
+        <dc:Bounds x="186" y="81" width="1506" height="238" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1mbw09j_di" bpmnElement="Lane_1mbw09j" isHorizontal="true">
+        <dc:Bounds x="186" y="319" width="1506" height="215" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1sfylyy_di" bpmnElement="lane3" isHorizontal="true">
+        <dc:Bounds x="186" y="534" width="1506" height="194" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_07ky0ye_di" bpmnElement="Lane_07ky0ye" isHorizontal="true" bioc:fill="#6F6FFB">
+        <dc:Bounds x="216" y="81" width="1476" height="238" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_109xabx_di" bpmnElement="Lane_109xabx" isHorizontal="true" bioc:fill="#73FBB9">
+        <dc:Bounds x="216" y="319" width="1476" height="215" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1ppf4zp_di" bpmnElement="Lane_1ppf4zp" isHorizontal="true" bioc:fill="#FBC571">
+        <dc:Bounds x="216" y="534" width="1476" height="194" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0s88w5d_di" bpmnElement="flwProjectRegistration">
+        <di:waypoint x="422" y="228" />
+        <di:waypoint x="479" y="228" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_049jkuc_di" bpmnElement="flwStart">
+        <di:waypoint x="285" y="228" />
+        <di:waypoint x="322" y="228" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11sdv7m_di" bpmnElement="flwIsSubjectToClauseTTrue">
+        <di:waypoint x="661" y="203" />
+        <di:waypoint x="661" y="141" />
+        <di:waypoint x="1056" y="141" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="668" y="169" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1tg64ye_di" bpmnElement="issueApprovalCode">
+        <dc:Bounds x="1056" y="101" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0mhma68_di" bpmnElement="end">
+        <dc:Bounds x="1516" y="123" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1524" y="100" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_117x93z_di" bpmnElement="flwIssueApprovalCode">
+        <di:waypoint x="1156" y="141" />
+        <di:waypoint x="1516" y="141" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0ztgtve_di" bpmnElement="xgwIsEnactedByStateCouncil" isMarkerVisible="true">
+        <dc:Bounds x="891" y="203" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0m4rfb2_di" bpmnElement="isEnactedByStateCouncil">
+        <dc:Bounds x="748" y="188" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_006ipsq_di" bpmnElement="flwIsEnactedByStateCouncil">
+        <di:waypoint x="848" y="228" />
+        <di:waypoint x="891" y="228" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1n52k76_di" bpmnElement="flwIsEnactedByStateCouncilTrue">
+        <di:waypoint x="941" y="228" />
+        <di:waypoint x="990" y="228" />
+        <di:waypoint x="990" y="348" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="957" y="210" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1tgapoe_di" bpmnElement="flwConfirmationAndCostAcceptionFalse">
+        <di:waypoint x="1131" y="388" />
+        <di:waypoint x="1512" y="388" />
+        <di:waypoint x="1512" y="268" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1187" y="363" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_091mhb3_di" bpmnElement="flwConfirmationAndCostAcceptionTrueFalseFalse">
+        <di:waypoint x="1119" y="400" />
+        <di:waypoint x="1119" y="589" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1146" y="426" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0dbcm3q_di" bpmnElement="requiredToEditOrSelectArbiters">
+        <dc:Bounds x="1056" y="589" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1er8s46_di" bpmnElement="xgwRequiredToEditOrSelectArbiters" isMarkerVisible="true">
+        <dc:Bounds x="1231" y="604" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wwiygf_di" bpmnElement="flwRequiredToEditOrSelectArbiters">
+        <di:waypoint x="1156" y="629" />
+        <di:waypoint x="1231" y="629" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0e3xczz_di" bpmnElement="flwRequiredToEditOrSelectArbitersTrue">
+        <di:waypoint x="1256" y="654" />
+        <di:waypoint x="1256" y="690" />
+        <di:waypoint x="342" y="690" />
+        <di:waypoint x="342" y="268" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1258" y="662" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1grc304_di" bpmnElement="callForArbitration">
+        <dc:Bounds x="1306" y="787" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0orzn4z_di" bpmnElement="flwRequiredToEditOrSelectArbitersFalse">
+        <di:waypoint x="1281" y="629" />
+        <di:waypoint x="1332" y="629" />
+        <di:waypoint x="1332" y="787" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1282" y="610" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0x84rh3_di" bpmnElement="isProjectApproved">
+        <dc:Bounds x="1373" y="589" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0friyj4_di" bpmnElement="xgwIsProjectApproved" isMarkerVisible="true">
+        <dc:Bounds x="1527" y="604" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07bsflg_di" bpmnElement="flwIsProjectApproved">
+        <di:waypoint x="1473" y="629" />
+        <di:waypoint x="1527" y="629" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1yq906u_di" bpmnElement="flwCallForArbitration">
+        <di:waypoint x="1392" y="787" />
+        <di:waypoint x="1392" y="669" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0wcrhcn_di" bpmnElement="flwIsProjectApprovedFalse">
+        <di:waypoint x="1552" y="604" />
+        <di:waypoint x="1552" y="268" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1555" y="559" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0sznjgm_di" bpmnElement="flwIsProjectApprovedTrue">
+        <di:waypoint x="1577" y="629" />
+        <di:waypoint x="1643" y="629" />
+        <di:waypoint x="1643" y="141" />
+        <di:waypoint x="1552" y="141" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1593" y="608" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Lane_0xbrxmw_di" bpmnElement="Lane_0xbrxmw" isHorizontal="true">
+        <dc:Bounds x="186" y="728" width="1506" height="169" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_049jppf_di" bpmnElement="Lane_049jppf" isHorizontal="true" bioc:fill="#98D6DA">
+        <dc:Bounds x="216" y="728" width="1476" height="169" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1ovaypo_di" bpmnElement="disapprovalNotifying">
+        <dc:Bounds x="1484" y="188" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_07luqt2_di" bpmnElement="flwIsEnactedByStateCouncilFalse">
+        <di:waypoint x="916" y="253" />
+        <di:waypoint x="916" y="629" />
+        <di:waypoint x="1056" y="629" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="920" y="262" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0esqqrd_di" bpmnElement="flwConfirmationAndCostAcceptionTrueTrue">
+        <di:waypoint x="1093" y="400" />
+        <di:waypoint x="1093" y="491" />
+        <di:waypoint x="394" y="491" />
+        <di:waypoint x="394" y="268" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1033" y="472" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0owk7el_di" bpmnElement="flwDisapprovalNotifying">
+        <di:waypoint x="1534" y="188" />
+        <di:waypoint x="1534" y="159" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
